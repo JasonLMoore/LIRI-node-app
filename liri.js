@@ -4,6 +4,12 @@ require("dotenv").config();
 //requires and imports 'keys.js' and stores it in a var//
 var keys = require("./keys.js");
 
+//node api reqs//
+  //note the capital first letter for the var//
+var Spotify = require('node-spotify-api');
+var axios = require('axios');
+var moment = require('moment');
+
 //access keys info//
 var spotify = new Spotify(keys.spotify);
 
