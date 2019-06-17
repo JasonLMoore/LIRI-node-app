@@ -49,7 +49,6 @@ var concertThis = function() {
     }
   )
 };
-console.log(concertThis());
 /////////////////////////////////////////////////////////////////
 
 //'movie-this'//
@@ -79,7 +78,6 @@ var movieThis = function(movie) {
     }
   );
 };
-console.log(movieThis());
 ////////////////////////////////////////////////////////////////////////////
 
 //`spotify-this-song`//
@@ -121,7 +119,6 @@ var spotifySearch = function(songName) {
     }
   );
 };
-console.log(spotifySearch());
 //////////////////////////////////////////////////////
 
 //do-what-it-says//
@@ -142,7 +139,6 @@ var doTxt = function() {
     }
   });
 };
-console.log(doTxt());
 /////////////////////////////////////////////////////////////
 
 //determins which command is used//
@@ -164,3 +160,13 @@ var pick = function(caseData, functionData) {
     console.log("I'm affraid I can't do that friend.");
   }
 };
+/////////////////////////////////////////////////////////////
+
+//takes in command line arg -> execute coresponding function//
+var runThatBack = function(argOne, argTwo) {
+  pick(argOne, argTwo);
+};
+/////////////////////////////////////////////////////////////////
+
+//main process//
+runThatBack(process.argv[2], process.argv.slice(3).join(" "));
