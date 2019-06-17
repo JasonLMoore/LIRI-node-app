@@ -2,17 +2,17 @@
 require("dotenv").config();
 
 //requires and imports 'keys.js' and stores it in a var//
-var keys = require("./keys.js");
+const keys = require("./keys.js");
 
 //node api reqs//
   //note the capital first letter for the var//
-var Spotify = require('node-spotify-api');
-var axios = require('axios');
-var moment = require('moment');
-var fs = require('fs');
+const Spotify = require('node-spotify-api');
+const axios = require('axios');
+const moment = require('moment');
+const fs = require('fs');
 
 //access keys info//
-var spotify = new Spotify(keys.spotify);
+const spotify = new Spotify(keys.spotify);
 
 ////////////////////////////////////////////////////////////////
 
@@ -20,11 +20,11 @@ var spotify = new Spotify(keys.spotify);
 
 //`node liri.js concert-this <artist/band name here>`//
 
-var concertThis = function() {
-  var nodeArgs = process.argv
-  var artist = "";
+let concertThis = function() {
+  let nodeArgs = process.argv
+  let artist = "";
 
-  for (var i = 2; i < nodeArgs.length; i++) {
+  for (let i = 2; i < nodeArgs.length; i++) {
     if (i > 2 && i < nodeArgs.length) {
       artist = artist + "+" + nodeArgs[i];
     }
@@ -33,12 +33,12 @@ var concertThis = function() {
     }
   }
 
-  var queryURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
+  let queryURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
   console.log("Query URL is " + queryURL);
 
   axios.get(queryURL).then(
     function(response) {
-      var resData = response.data[0];
+      let resData = response.data[0];
       console.log("Next performance for " + artist + " :");
       console.log(
         resData.venue.city + ", " +
@@ -55,16 +55,16 @@ var concertThis = function() {
 
 //`node liri.js movie-this '<movie name here>'`//
 
-var movieThis = function(movie) {
+let movieThis = function(movie) {
   if (movie === undefined) {
     movie = "Mr Nobody";
   }
 
-  var fullURL = "http://www.omdbapi.com/?t=" + movie + "&y=&plot=full&tomatoes=true&apikey=trilogy";
+  let fullURL = "http://www.omdbapi.com/?t=" + movie + "&y=&plot=full&tomatoes=true&apikey=trilogy";
   
   axios.get(fullURL).then(
     function(response) {
-      var resDotData = response.data;
+      let resDotData = response.data;
       
       console.log("Title: " + resDotData.Title);
       console.log("Year: " + resDotData.Year);
@@ -85,12 +85,12 @@ var movieThis = function(movie) {
 //`node liri.js spotify-this-song '<song name here>'`//
 
 //Function gets artist name//
-var getArtist = function(artist) {
+let getArtist = function(artist) {
   return artist.name;
 };
 
 //runs Spotify Search//
-var spotifySearch = function(songName) {
+let spotifySearch = function(songName) {
   if (songName === undefined) {
     songName = "The Sign";
   }
@@ -106,9 +106,9 @@ var spotifySearch = function(songName) {
         return;
       }
 
-      var songs = data.tracks.items;
+      let songs = data.tracks.items;
 
-      for (var i = 0; i < songs.length; i++) {
+      for (let i = 0; i < songs.length; i++) {
         console.log(i);
         console.log("artist(s): " + songs[i].artists.map(getArtist));
         console.log("song name: " + songs[i].name);
@@ -126,11 +126,11 @@ var spotifySearch = function(songName) {
 //`node liri.js do-what-it-says`//
 
 //runs command based on txt file//
-var doTxt = function() {
+let doTxt = function() {
   fs.readFile("random.txt", "utf8", function(error, data) {
     console.log("Txt data: " + data);
 
-    var dataArr = data.split(",");
+    let dataArr = data.split(",");
 
     if (dataArr.length === 2) {
       pick(dataArr[0], dataArr[1]);
@@ -142,7 +142,7 @@ var doTxt = function() {
 /////////////////////////////////////////////////////////////
 
 //determins which command is used//
-var pick = function(caseData, functionData) {
+let pick = function(caseData, functionData) {
   switch (caseData) {
   case "concert-this":
     concertThis(functionData);
@@ -163,7 +163,7 @@ var pick = function(caseData, functionData) {
 /////////////////////////////////////////////////////////////
 
 //takes in command line arg -> execute coresponding function//
-var runThatBack = function(argOne, argTwo) {
+let runThatBack = function(argOne, argTwo) {
   pick(argOne, argTwo);
 };
 /////////////////////////////////////////////////////////////////
