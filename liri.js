@@ -49,17 +49,30 @@ var spotify = new Spotify(keys.spotify);
 
 //};
 
-//console.log("concert this" + concertThis());
-
 //`spotify-this-song`//
-  //`node liri.js spotify-this-song '<song name here>'`//
-    //This will show the following information about the song in your terminal/bash window//
-      //Artist(s)//
-      //The song's name//
-      //A preview link of the song from Spotify//
-      //The album that the song is from//
-      //SEE HW INSTRUCTIONS FOR FURTHER REQS//
-//
+var getMovie = function(movie) {
+  if (movie === undefined) {
+    movie = "Mr Nobody";
+  }
+
+  var fullURL = "http://www.omdbapi.com/?t=" + movie + "&y=&plot=full&tomatoes=true&apikey=trilogy";
+
+  axios.get(fullURL).then(
+    function(response) {
+      var resDotData = response.data;
+
+      console.log("Title: " + resDotData.Title);
+      console.log("Year: " + resDotData.Year);
+      console.log("Rated: " + resDotData.Rated);
+      console.log("IMDB Rating: " + resDotData.imdbRating);
+      console.log("Country: " + resDotData.Country);
+      console.log("Language: " + resDotData.Language);
+      console.log("Plot: " + resDotData.Plot);
+      console.log("Actors: " + resDotData.Actors);
+      console.log("Rotten Tomatoes Rating: " + resDotData.Ratings[1].Value);
+    }
+  );
+};
 
 //`movie-this`//
   //`node liri.js movie-this '<movie name here>'`//
