@@ -17,7 +17,9 @@ var spotify = new Spotify(keys.spotify);
 ////////////////////////////////////////////////////////////////
 
 //'concert-this'//
-  //`node liri.js concert-this <artist/band name here>`//
+
+//`node liri.js concert-this <artist/band name here>`//
+
 var concertThis = function() {
   //var nodeArgs = process.argv
   var artist = "ZZ Top";
@@ -51,9 +53,10 @@ var concertThis = function() {
 console.log(concertThis());
 /////////////////////////////////////////////////////////////////
 
-
-
 //'movie-this'//
+
+//`node liri.js movie-this '<movie name here>'`//
+
 var movieThis = function(movie) {
   if (movie === undefined) {
     movie = "Mr Nobody";
@@ -80,9 +83,9 @@ var movieThis = function(movie) {
 console.log(movieThis());
 ////////////////////////////////////////////////////////////////////////////
 
-
-
 //`spotify-this-song`//
+
+//`node liri.js spotify-this-song '<song name here>'`//
 
 //Function gets artist name//
 var getArtist = function(artist) {
@@ -121,9 +124,23 @@ var spotifySearch = function(songName) {
 };
 console.log(spotifySearch());
 //////////////////////////////////////////////////////
-//`do-what-it-says`//
-  //`node liri.js do-what-it-says`//
-  //Using the `fs` Node package, LIRI will take the text inside of random.txt and then use it to call one of LIRI's commands.//
-  //It should run `spotify-this-song` for "I Want it That Way," as follows the text in `random.txt`.//
-  //Edit the text in random.txt to test out the feature for movie-this and concert-this.//
-//
+
+//do-what-it-says//
+
+//`node liri.js do-what-it-says`//
+
+//runs command based on txt file//
+var doTxt = function() {
+  fs.readFile("random.txt", "utf8", function(error, data) {
+    console.log("Txt data: " + data);
+
+    var dataArr = data.split(",");
+
+    if (dataArr.length === 2) {
+      pick(dataArr[0], dataArr[1]);
+    } else if (dataArr.length === 1) {
+      pick(dataArr[0]);
+    }
+  });
+};
+console.log(doTxt());
