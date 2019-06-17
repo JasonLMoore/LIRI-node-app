@@ -15,11 +15,40 @@ var spotify = new Spotify(keys.spotify);
 
 //'concert-this'//
   //`node liri.js concert-this <artist/band name here>`//
-    //* This will search the Bands in Town Artist Events API (`"https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp"`) for an artist and render the following information about each event to the terminal://
-      //* Name of the venue//
-      //* Venue location//
-      //* Date of the Event (use moment to format this as "MM/DD/YYYY")//
 //
+
+//concertThis = function() {
+  //var nodeArgs = process.argv
+  var artist = "ZZ Top";
+
+  //for (var i = 2; i < nodeArgs.length; i++) {
+    //if (i > 2 && i < nodeArgs.length) {
+      //artist = artist + "+" + nodeArgs[i];
+    //}
+    //else {
+      //artist += nodeArgs[i];
+    //}
+  //}
+
+  var queryURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
+  console.log("Query URL is " + queryURL);
+
+  axios.get(queryURL).then(
+    function(response) {
+      var resData = response.data[0];
+      console.log("Next performance for " + artist + " :");
+      console.log(
+        resData.venue.city + ", " +
+        (resData.venue.region || resData.venue.country) +
+        " at " + resData.venue.name +
+        " on " + moment(resData.datetime).format("MM/DD/YYYY")
+      );
+    }
+  )
+
+//};
+
+//console.log("concert this" + concertThis());
 
 //`spotify-this-song`//
   //`node liri.js spotify-this-song '<song name here>'`//
