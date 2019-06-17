@@ -16,9 +16,7 @@ var spotify = new Spotify(keys.spotify);
 
 //'concert-this'//
   //`node liri.js concert-this <artist/band name here>`//
-//
-
-//concertThis = function() {
+var concertThis = function() {
   //var nodeArgs = process.argv
   var artist = "ZZ Top";
 
@@ -47,10 +45,11 @@ var spotify = new Spotify(keys.spotify);
     }
   )
 
-//};
+};
+console.log(concertThis());
 
 //`spotify-this-song`//
-var getMovie = function(movie) {
+var movieThis = function(movie) {
   if (movie === undefined) {
     movie = "Mr Nobody";
   }
@@ -69,24 +68,12 @@ var getMovie = function(movie) {
       console.log("Language: " + resDotData.Language);
       console.log("Plot: " + resDotData.Plot);
       console.log("Actors: " + resDotData.Actors);
-      console.log("Rotten Tomatoes Rating: " + resDotData.Ratings[1].Value);
+      console.log("Rotten Tomatoes Rating: " + resDotData.Ratings[0].Value);
     }
   );
 };
+console.log(movieThis());
 
-//`movie-this`//
-  //`node liri.js movie-this '<movie name here>'`//
-    //This will output the following information to your terminal/bash window://
-      //Title of the movie.//
-      //Year the movie came out.//
-      //IMDB Rating of the movie.//
-      //Rotten Tomatoes Rating of the movie.//
-      //Country where the movie was produced.//
-      //Language of the movie.//
-      //Plot of the movie.//
-      //Actors in the movie.//
-      //SEE HW INSTRUCTIONS FOR FURTHER REQS//
-//
 
 //`do-what-it-says`//
   //`node liri.js do-what-it-says`//
